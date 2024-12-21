@@ -116,7 +116,7 @@ const UserUpdatePage = () => {
                             {...inputVariants}
                             className="mb-4"
                         >
-                            <label className="block text-gray-700 text-sm font-bold mb-2 flex items-center" htmlFor="emailOrName">
+                            <label className=" text-gray-700 text-sm font-bold mb-2 flex items-center" htmlFor="emailOrName">
                                 <UserIcon className="h-5 w-5 mr-2 text-purple-500" />
                                 Enter Email or First & Last Name
                             </label>
@@ -141,7 +141,7 @@ const UserUpdatePage = () => {
                                 transition={{ delay: 0.1, duration: 0.3 }}
                                 className="mb-4"
                             >
-                                <label className="block text-gray-700 text-sm font-bold mb-2 flex items-center" htmlFor="firstName">
+                                <label className=" text-gray-700 text-sm font-bold mb-2 flex items-center" htmlFor="firstName">
                                     <IdentificationIcon className="h-5 w-5 mr-2 text-purple-500" />
                                     First Name
                                 </label>
@@ -160,7 +160,7 @@ const UserUpdatePage = () => {
                                 transition={{ delay: 0.2, duration: 0.3 }}
                                 className="mb-4"
                             >
-                                <label className="block text-gray-700 text-sm font-bold mb-2 flex items-center" htmlFor="lastName">
+                                <label className=" text-gray-700 text-sm font-bold mb-2 flex items-center" htmlFor="lastName">
                                     <IdentificationIcon className="h-5 w-5 mr-2 text-purple-500" />
                                     Last Name
                                 </label>
@@ -181,7 +181,7 @@ const UserUpdatePage = () => {
                     transition={{ delay: 0.3, duration: 0.3 }}
                     className="mb-4"
                 >
-                    <label className="block text-gray-700 text-sm font-bold mb-2 flex items-center" htmlFor="role">
+                    <label className=" text-gray-700 text-sm font-bold mb-2 flex items-center" htmlFor="role">
                         <UserPlusIcon className="h-5 w-5 mr-2 text-purple-500" />
                         New Role
                     </label>
