@@ -2,7 +2,12 @@ import maintainerModel from "../models/maintainerModel.js";
 
 export const authenticateMaintainer = async (req, res, next) => {
     try {
-        const { maintainerEmail } = req.body;
+        let { maintainerEmail } = req.body;
+
+        if (!maintainerEmail) {
+            maintainerEmail = req.params.maintainerEmail;
+        }
+
         if (!maintainerEmail || typeof maintainerEmail !== "string") {
             return res.status(400).json({ message: "Invalid email provided" });
         }

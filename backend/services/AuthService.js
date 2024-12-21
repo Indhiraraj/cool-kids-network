@@ -23,6 +23,9 @@ class AuthService {
 
     static loginUser = async (email, password) => {
         const user = await userModel.findOne({ email: email });
+        if(!user) {
+            throw new Error("User not found");
+        }
         const isAuthenticated = await bcrypt.compare(password, user.password);
 
         if (isAuthenticated) {

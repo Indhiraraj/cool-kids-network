@@ -1,7 +1,7 @@
 import { userModel } from "../models/userModel.js";
 
 class UserService {
-    static getAllUsers = async (id) => {
+    static getUsersInfo = async (id) => {
         const user = await userModel.findOne({ id: id });
         const role = user.role;
 
@@ -18,6 +18,12 @@ class UserService {
             default:
                 throw new Error("Invalid user role");
         }
+    };
+
+    static getAllUsers = async () => {
+        const users = await userModel.find({}, {first_name: 1, last_name: 1, email: 1, role: 1});
+        return users;
+
     };
 
     static updateUser = async (email, firstName, lastName, role) => {

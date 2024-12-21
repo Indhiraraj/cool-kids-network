@@ -27,8 +27,8 @@ export const loginUser = async (req, res) => {
 export const loginMainatiner = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const mainatiner = await AuthService.loginMainatiner(email, password);
-        res.status(200).json({ message: "mainatiner login successful", mainatiner: mainatiner });
+        const maintainer = await AuthService.loginMainatiner(email, password);
+        res.status(200).json({ message: "maintainer login successful", maintainer: maintainer });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: error.message });
