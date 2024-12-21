@@ -1,9 +1,19 @@
 import UserService from "../services/UserService.js"
 
-const getAllUsers = async (req, res) => {
+const getUsersInfo = async (req, res) => {
     const { id } = req.params;
     try {
-        const users = await UserService.getAllUsers(id);
+        const users = await UserService.getUsersInfo(id);
+        res.status(200).json({ message: "users fetch successful", users: users })
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error.message });
+    }
+}
+
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await UserService.getAllUsers();
         res.status(200).json({ message: "users fetch successful", users: users })
     } catch (error) {
         console.error(error);
@@ -23,4 +33,4 @@ const updateUser = async (req, res) => {
 
 }
 
-export { getAllUsers, updateUser };
+export { getAllUsers, updateUser, getUsersInfo };
