@@ -28,7 +28,7 @@ app.use("/api/auth", authRouter);
 
 app.use("/api/users", userRouter);
 
-app.use('*', (req, res) => {
+app.get('*', (req, res) => {
     console.log(path.join(__dirname, 'dist', 'index.html'));
     
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
