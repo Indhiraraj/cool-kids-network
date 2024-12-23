@@ -28,7 +28,7 @@ const SignInPage = () => {
 
         } catch (error) {
             let message = `Login failed: ${error.message}`
-            toast(message, { type: "error" })
+            toast(message, { type: "error", position: 'bottom-right', autoClose: 2000 })
         }
 
         // Add your login logic here

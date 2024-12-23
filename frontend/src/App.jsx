@@ -6,13 +6,12 @@ import SignInPage from './pages/SignInPage';
 import UserUpdatePage from './pages/UserUpdatePage';
 import ProtectedRoute from './components/ProtectedRoute';
 import MaintainerPage from './pages/MaintainerPage';
-import { ToastContainer } from 'react-toastify';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <>
       <BrowserRouter>
-      <ToastContainer />
         <Routes>
           <Route path="/" Component={HomePage} />
           <Route path="/sign-up" Component={SignUpPage} />
@@ -35,6 +34,7 @@ function App() {
           />
         </Routes>
       </BrowserRouter>
+      <Footer />
     </>
   );
 }

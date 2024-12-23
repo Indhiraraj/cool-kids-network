@@ -14,6 +14,7 @@ import {
     SparklesIcon
 } from '@heroicons/react/24/solid';
 import UsersGrid from "../components/UsersGrid";
+import Footer from "../components/Footer";
 
 const HomePage = () => {
     const location = useLocation();
@@ -50,7 +51,7 @@ const HomePage = () => {
 
                 setUsers(users);
             } catch (error) {
-                toast(error.message || "Failed to fetch users.", { type: "error" });
+                toast(error.message || "Failed to fetch users.", { type: "error", position: 'bottom-right', autoClose: 2000 });
             }
         };
 
@@ -162,6 +163,7 @@ const HomePage = () => {
             </div>
 
             <ToastContainer />
+            {/* <Footer /> */}
         </div>
     );
 };

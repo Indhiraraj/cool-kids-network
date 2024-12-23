@@ -17,14 +17,14 @@ const SignUpPage = () => {
             navigate("/", { state: { toastMessage: message, type: 'success' } });
         } catch (error) {
             let message = `Sign up failed, ${error.message}`;
-            toast(message, {type: 'error'});
+            toast(message, {type: 'error', position: 'bottom-right', autoClose: 2000});
         }
     };
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
             <Form title={"Sign Up"} email={email} setEmail={setEmail} password={password} setPassword={setPassword} handleSubmit={handleRegister} />
-            {/* <ToastContainer /> */}
+            <ToastContainer />
         </div>
     );
 };
