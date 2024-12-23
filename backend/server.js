@@ -28,8 +28,10 @@ app.use("/api/auth", authRouter);
 
 app.use("/api/users", userRouter);
 
-app.get('*', (req, res) => {
-    res.send(path.join(__dirname, 'dist', 'index.html'));
+app.use('*', (req, res) => {
+    console.log(path.join(__dirname, 'dist', 'index.html'));
+    
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 app.listen(process.env.PORT, () => {
