@@ -15,7 +15,7 @@ const MaintainerPage = () => {
 
     useEffect(() => {
         if (location.state?.toastMessage) {
-            toast(location.state.toastMessage, { type: location.state.type });
+            toast(location.state.toastMessage, { type: location.state.type, position: 'bottom-right', autoClose: 2000 });
             navigate(location.pathname, { replace: true });
         }
     }, [location.state, navigate]);
@@ -45,9 +45,9 @@ const MaintainerPage = () => {
     };
 
     const handleUserUpdate = (email, role) => {
-        setUsers(prevUsers => 
-            prevUsers.map(user => 
-                user.email === email ? {...user,role} : user
+        setUsers(prevUsers =>
+            prevUsers.map(user =>
+                user.email === email ? { ...user, role } : user
             )
         );
     };
@@ -81,7 +81,7 @@ const MaintainerPage = () => {
                 )}
             </div>
 
-            {/* <ToastContainer /> */}
+            <ToastContainer />
         </div>
     );
 };

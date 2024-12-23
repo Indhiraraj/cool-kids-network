@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-    UserCircleIcon, 
-    EnvelopeIcon, 
-    GlobeAltIcon, 
-    CheckBadgeIcon, 
+import {
+    UserCircleIcon,
+    EnvelopeIcon,
+    GlobeAltIcon,
+    CheckBadgeIcon,
     UserIcon,
     FireIcon,
     SparklesIcon
@@ -12,16 +12,16 @@ import {
 
 const UsersGrid = ({ users }) => {
     const roles = [
-        { 
-            value: "Cool Kid", 
+        {
+            value: "Cool Kid",
             icon: <UserIcon className="h-6 w-6 text-purple-500" />,
         },
-        { 
-            value: "Cooler Kid", 
+        {
+            value: "Cooler Kid",
             icon: <FireIcon className="h-6 w-6 text-purple-500" />,
         },
-        { 
-            value: "Coolest Kid", 
+        {
+            value: "Coolest Kid",
             icon: <SparklesIcon className="h-6 w-6 text-purple-500" />,
         }
     ];
@@ -31,10 +31,7 @@ const UsersGrid = ({ users }) => {
     };
 
     return (
-        <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.7 }}
+        <motion.div
             className="container mx-auto py-8 px-4 min-h-screen"
         >
             <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-purple-900 mb-8 text-center">
@@ -43,17 +40,17 @@ const UsersGrid = ({ users }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
                 {users.map((user, index) => {
                     const roleConfig = getRoleConfig(user.role);
-                    
+
                     return (
                         <motion.div
                             key={user.email || index}
-                            initial={{ scale: 0.9, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            initial={{ opacity: 0, x: -20, y: -20 }}
+                            animate={{ opacity: 1, x: 0, y: 0 }}
+                            transition={{ duration: 0.5, delay: index * 0.2 }}
                             className="w-full relative"
                         >
                             <motion.div
-                                whileHover={{ 
+                                whileHover={{
                                     scale: 1.05,
                                     transition: { duration: 0.2 }
                                 }}
@@ -89,7 +86,7 @@ const UsersGrid = ({ users }) => {
                                                     </div>
                                                 </div>
                                             )}
-                                            
+
                                             {user.country && (
                                                 <div className="p-3 rounded-lg border-2 border-purple-200 bg-gray-50">
                                                     <div className="flex items-center justify-center text-gray-600">
@@ -116,8 +113,8 @@ const UsersGrid = ({ users }) => {
                         </motion.div>
                     );
                 })}
-            </div>
-        </motion.div>
+            </div >
+        </motion.div >
     );
 };
 

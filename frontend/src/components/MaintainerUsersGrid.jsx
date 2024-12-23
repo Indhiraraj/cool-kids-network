@@ -38,12 +38,13 @@ const MaintainerUsersGrid = ({ users, onUserUpdate }) => {
                 role: newRole,
                 maintainerEmail: maintainer.email
             });
-            
-            toast.success(`Updated ${user.first_name}'s role to ${newRole}`);
+            const message = `Updated ${user.first_name}'s role to ${newRole}`;
+            toast(message, {type: 'success', position: 'bottom-right', autoClose: 2000});
             onUserUpdate(user.email, newRole);
             setSelectedUser(null);
         } catch (error) {
-            toast.error(`Failed to update role: ${error.message}`);
+            const message = `Failed to update role: ${error.message}`;
+            toast(message, {type: 'error', position: 'bottom-right', autoClose: 2000});
         }
     };
 

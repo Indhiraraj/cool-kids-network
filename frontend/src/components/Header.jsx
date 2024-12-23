@@ -126,7 +126,7 @@ const Header = ({ handleLogout }) => {
                 <motion.div 
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
+                    transition={{ duration: 0.2, delay: 0.2 }}
                     className="flex items-center space-x-3 cursor-pointer"
                     onClick={() => navigate('/')}
                     whileHover={{ scale: 1.05 }}
