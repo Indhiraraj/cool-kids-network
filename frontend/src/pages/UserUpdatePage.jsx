@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast, ToastContainer } from 'react-toastify';
-import { 
-    UserIcon, 
-    IdentificationIcon, 
-    UserPlusIcon, 
+import {
+    UserIcon,
+    IdentificationIcon,
+    UserPlusIcon,
     AcademicCapIcon,
     StarIcon,
     FireIcon,
@@ -29,18 +29,18 @@ const UserUpdatePage = () => {
     }, [location.state]);
 
     const roles = [
-        { 
-            value: "Cool Kid", 
+        {
+            value: "Cool Kid",
             icon: <UserIcon className="h-6 w-6" />,
             color: "text-blue-500"
         },
-        { 
-            value: "Cooler Kid", 
+        {
+            value: "Cooler Kid",
             icon: <FireIcon className="h-6 w-6" />,
             color: "text-orange-500"
         },
-        { 
-            value: "Coolest Kid", 
+        {
+            value: "Coolest Kid",
             icon: <SparklesIcon className="h-6 w-6" />,
             color: "text-yellow-500"
         }
@@ -80,11 +80,11 @@ const UserUpdatePage = () => {
     };
 
     const buttonVariants = {
-        hover: { 
+        hover: {
             scale: 1.05,
             transition: { duration: 0.2 }
         },
-        tap: { 
+        tap: {
             scale: 0.95,
             transition: { duration: 0.2 }
         }
@@ -99,7 +99,7 @@ const UserUpdatePage = () => {
                 onSubmit={handleUpdate}
                 className="bg-white shadow-xl rounded-xl px-8 pt-6 pb-8 mb-4 w-96 border border-purple-100"
             >
-                <motion.h2 
+                <motion.h2
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4 }}
@@ -111,7 +111,7 @@ const UserUpdatePage = () => {
 
                 <AnimatePresence>
                     {(!firstName && !lastName) && (
-                        <motion.div 
+                        <motion.div
                             key="email-input"
                             {...inputVariants}
                             className="mb-4"
@@ -135,7 +135,7 @@ const UserUpdatePage = () => {
                 <AnimatePresence>
                     {emailOrName ? null : (
                         <>
-                            <motion.div 
+                            <motion.div
                                 key="first-name"
                                 {...inputVariants}
                                 transition={{ delay: 0.1, duration: 0.3 }}
@@ -154,7 +154,7 @@ const UserUpdatePage = () => {
                                 />
                             </motion.div>
 
-                            <motion.div 
+                            <motion.div
                                 key="last-name"
                                 {...inputVariants}
                                 transition={{ delay: 0.2, duration: 0.3 }}
@@ -176,7 +176,7 @@ const UserUpdatePage = () => {
                     )}
                 </AnimatePresence>
 
-                <motion.div 
+                <motion.div
                     {...inputVariants}
                     transition={{ delay: 0.3, duration: 0.3 }}
                     className="mb-4"
@@ -193,8 +193,8 @@ const UserUpdatePage = () => {
                                 whileTap={{ scale: 0.95 }}
                                 className={`
                                     cursor-pointer rounded-lg p-2 text-center 
-                                    ${newRole === role.value 
-                                        ? 'bg-purple-500 text-white' 
+                                    ${newRole === role.value
+                                        ? 'bg-purple-500 text-white'
                                         : 'bg-purple-50 text-purple-700 hover:bg-purple-100'
                                     }
                                     transition-all duration-300 flex flex-col items-center
@@ -230,7 +230,15 @@ const UserUpdatePage = () => {
                     <span>Update User</span>
                 </motion.button>
             </motion.form>
-            <ToastContainer />
+            <ToastContainer
+                position="bottom-right"
+                autoClose={1500}
+                hideProgressBar={false}
+                closeOnClick
+                pauseOnHover={false}
+                draggable
+                className="!fixed !bottom-4 !right-2 !left-auto !top-auto !w-auto !max-w-[90vw] md:!max-w-sm"
+            />
         </div>
     );
 };
