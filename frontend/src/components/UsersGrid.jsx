@@ -49,9 +49,9 @@ const UsersGrid = ({ users }) => {
                     return (
                         <motion.div
                             key={user.email || index}
-                            initial={{ opacity: 0, x: -20, y: -20 }}
-                            animate={{ opacity: 1, x: 0, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.2 }}
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
                             className="w-full relative"
                         >
                             <motion.div

@@ -6,12 +6,14 @@ import { getAllUsers, getUsersData } from "../services/userApiService";
 import { motion } from "framer-motion";
 import UsersGrid from "../components/UsersGrid";
 import MaintainerUsersGrid from "../components/MaintainerUsersGrid";
+import Loading from "../components/Loading";
 
 const MaintainerPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     const [currentMaintainer, setCurrentMaintainer] = useState(JSON.parse(localStorage.getItem("maintainer")) || null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (location.state?.toastMessage) {
@@ -25,8 +27,10 @@ const MaintainerPage = () => {
             try {
                 const usersData = await getAllUsers();
                 setUsers(usersData);
+                setLoading(false)
             } catch (error) {
                 toast(error.message || "Failed to fetch users.", { type: "error" });
+                setLoading(false);
             }
         };
 
@@ -74,14 +78,22 @@ const MaintainerPage = () => {
 
                 {users.length > 0 ? (
                     <MaintainerUsersGrid users={users} onUserUpdate={handleUserUpdate} />
-                ) : (
+                ) : loading ? <Loading /> : (
                     <div className="text-center text-gray-500 mt-12">
                         No users to display.
                     </div>
                 )}
             </div>
 
-            <ToastContainer />
+            <ToastContainer
+                position="bottom-right"
+                autoClose={1500}
+                hideProgressBar={false}
+                closeOnClick
+                pauseOnHover={false}
+                draggable
+                className="!fixed !bottom-4 !right-2 !left-auto !top-auto !w-auto !max-w-[90vw] md:!max-w-sm"
+            />
         </div>
     );
 };

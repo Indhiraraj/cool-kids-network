@@ -4,11 +4,11 @@ import { toast, ToastContainer } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getUsersData } from "../services/userApiService";
 import { motion } from "framer-motion";
-import { 
-    UserCircleIcon, 
-    EnvelopeIcon, 
-    GlobeAltIcon, 
-    CheckBadgeIcon, 
+import {
+    UserCircleIcon,
+    EnvelopeIcon,
+    GlobeAltIcon,
+    CheckBadgeIcon,
     UserIcon,
     FireIcon,
     SparklesIcon,
@@ -16,11 +16,13 @@ import {
 } from '@heroicons/react/24/solid';
 import UsersGrid from "../components/UsersGrid";
 import WelcomeSection from "../components/WelcomeSection";
+import Loading from "../components/Loading";
 
 const HomePage = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [accessDenied, setAccessDenied] = useState(false);
     const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
     const roles = [
@@ -57,8 +59,10 @@ const HomePage = () => {
                 const usersData = await getUsersData({ id });
                 const users = usersData.users.filter((user) => user.email !== currentUser.email);
                 setUsers(users);
+                setLoading(false);
             } catch (error) {
                 toast(error.message || "Failed to fetch users.", { type: "error", position: 'bottom-right', autoClose: 2000 });
+                setLoading(false);
             }
         };
 
@@ -158,8 +162,8 @@ const HomePage = () => {
                             </div>
                         </motion.div>
                     </motion.div>
-                ) : 
-                <WelcomeSection />
+                ) :
+                    <WelcomeSection />
                 }
 
                 {currentUser && accessDenied ? (
@@ -176,7 +180,7 @@ const HomePage = () => {
                             Access Restricted
                         </h2>
                         <p className="text-gray-600 mb-4">
-                            As a Cool Kid, you do not have permission to view other users' details. 
+                            As a Cool Kid, you do not have permission to view other users' details.
                             Upgrade your status to access more features.
                         </p>
                         <div className="flex justify-center space-x-2">
@@ -187,14 +191,22 @@ const HomePage = () => {
                     </motion.div>
                 ) : currentUser && (users.length > 0 ? (
                     <UsersGrid users={users} />
-                ) : (
+                ) : loading ? <Loading /> : (
                     <div className="text-center text-gray-500 mt-12">
                         No users to display.
                     </div>
                 ))}
             </div>
 
-            <ToastContainer />
+            <ToastContainer
+                position="bottom-right"
+                autoClose={1500}
+                hideProgressBar={false}
+                closeOnClick
+                pauseOnHover={false}
+                draggable
+                className="!fixed !bottom-4 !right-2 !left-auto !top-auto !w-auto !max-w-[90vw] md:!max-w-sm"
+            />
         </div>
     );
 };
