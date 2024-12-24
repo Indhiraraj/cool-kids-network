@@ -30,11 +30,16 @@ const UsersGrid = ({ users }) => {
         return roles.find(r => r.value === role) || roles[0];
     };
 
+    const truncateText = (text, maxLength = 20) => {
+        if (text.length <= maxLength) return text;
+        return `${text.substring(0, maxLength)}...`;
+    };
+
     return (
         <motion.div
             className="container mx-auto py-8 px-4 min-h-screen"
         >
-            <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-purple-900 mb-8 text-center">
+            <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-purple-600 mb-8 text-center">
                 Community Members
             </h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
@@ -73,32 +78,34 @@ const UsersGrid = ({ users }) => {
                                     {/* User Info */}
                                     <div className="text-center space-y-4">
                                         <h2 className="text-xl font-bold text-gray-800 flex items-center justify-center">
-                                            {user.first_name} {user.last_name}
-                                            <CheckBadgeIcon className="h-5 w-5 ml-2 text-purple-500" />
+                                            <span className="truncate max-w-[200px]">
+                                                {truncateText(`${user.first_name} ${user.last_name}`, 25)}
+                                            </span>
+                                            <CheckBadgeIcon className="h-5 w-5 ml-2 flex-shrink-0 text-purple-500" />
                                         </h2>
 
                                         <div className="space-y-2">
                                             {user.email && (
-                                                <div className="p-3 rounded-lg border-2 border-purple-200 bg-gray-50">
-                                                    <div className="flex items-center justify-center text-gray-600">
-                                                        <EnvelopeIcon className="h-5 w-5 mr-2" />
-                                                        <span className="text-sm">{user.email}</span>
-                                                    </div>
+                                                <div className="p-3 rounded-lg border-2 border-purple-200 text-gray-600 bg-gray-50 flex items-center justify-center">
+                                                    <EnvelopeIcon className="h-5 w-5 mr-2 flex-shrink-0" />
+                                                    <span className="text-sm truncate max-w-[200px]" title={user.email}>
+                                                        {user.email}
+                                                    </span>
                                                 </div>
                                             )}
 
                                             {user.country && (
-                                                <div className="p-3 rounded-lg border-2 border-purple-200 bg-gray-50">
-                                                    <div className="flex items-center justify-center text-gray-600">
-                                                        <GlobeAltIcon className="h-5 w-5 mr-2" />
-                                                        <span className="text-sm">{user.country}</span>
-                                                    </div>
+                                                <div className="p-3 rounded-lg border-2 text-gray-600 border-purple-200 bg-gray-50 flex items-center justify-center">
+                                                    <GlobeAltIcon className="h-5 w-5 mr-2 flex-shrink-0" />
+                                                    <span className="text-sm truncate max-w-[200px]">
+                                                        {truncateText(user.country)}
+                                                    </span>
                                                 </div>
                                             )}
                                         </div>
 
                                         {user.role && (
-                                            <div className="pt-4 border-t border-gray-100">
+                                            <div className="pt-4 border-t border-gray-100 flex justify-center">
                                                 <span className="inline-flex items-center px-4 py-2 rounded-full
                                                              border-2 border-purple-200 text-purple-500
                                                              text-sm font-medium">
@@ -113,8 +120,8 @@ const UsersGrid = ({ users }) => {
                         </motion.div>
                     );
                 })}
-            </div >
-        </motion.div >
+            </div>
+        </motion.div>
     );
 };
 

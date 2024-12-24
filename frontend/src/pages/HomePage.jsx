@@ -11,15 +11,17 @@ import {
     CheckBadgeIcon, 
     UserIcon,
     FireIcon,
-    SparklesIcon
+    SparklesIcon,
+    LockClosedIcon
 } from '@heroicons/react/24/solid';
 import UsersGrid from "../components/UsersGrid";
-import Footer from "../components/Footer";
+import WelcomeSection from "../components/WelcomeSection";
 
 const HomePage = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
+    const [accessDenied, setAccessDenied] = useState(false);
     const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
     const roles = [
         {
@@ -35,6 +37,7 @@ const HomePage = () => {
             icon: <SparklesIcon className="h-6 w-6 text-purple-500" />,
         }
     ];
+
     useEffect(() => {
         if (location.state?.toastMessage) {
             toast(location.state.toastMessage, { type: location.state.type, position: 'bottom-right', autoClose: 2000 });
@@ -45,10 +48,14 @@ const HomePage = () => {
     useEffect(() => {
         const fetchUsersData = async (id) => {
             try {
+                // Check if user is Cool Kid
+                if (currentUser.role === "Cool Kid") {
+                    setAccessDenied(true);
+                    return;
+                }
+
                 const usersData = await getUsersData({ id });
                 const users = usersData.users.filter((user) => user.email !== currentUser.email);
-                console.log(users);
-
                 setUsers(users);
             } catch (error) {
                 toast(error.message || "Failed to fetch users.", { type: "error", position: 'bottom-right', autoClose: 2000 });
@@ -79,15 +86,15 @@ const HomePage = () => {
                     transition={{ duration: 0.6 }}
                     className="text-center mb-12"
                 >
-                    <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-purple-700 mb-4">
-                        Welcome to Cool Kids Network
+                    <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-purple-600 mb-4">
+                        Welcome to Cool Kids Network!
                     </h1>
                     <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                         Connect, Collaborate, and Grow Together
                     </p>
                 </motion.div>
 
-                {currentUser && (
+                {currentUser ? (
                     <motion.div
                         initial={{ scale: 0.9, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
@@ -105,9 +112,9 @@ const HomePage = () => {
                 transition-all duration-300
                 overflow-hidden p-6"
                         >
-                            <div className="flex items-start space-x-6">
+                            <div className="flex items-start sm:space-x-6">
                                 {/* User Icon */}
-                                <div className="flex-shrink-0">
+                                <div className="flex-shrink-0 hidden sm:block">
                                     <div className="p-3 rounded-full border-2 border-purple-200">
                                         {roles.find(r => r.value === currentUser.role)?.icon ||
                                             <UserCircleIcon className="h-16 w-16 text-purple-500" />}
@@ -151,19 +158,43 @@ const HomePage = () => {
                             </div>
                         </motion.div>
                     </motion.div>
-                )}
+                ) : 
+                <WelcomeSection />
+                }
 
-                {users.length > 0 ? (
+                {currentUser && accessDenied ? (
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="max-w-md mx-auto bg-white rounded-2xl shadow-lg p-6 text-center"
+                    >
+                        <div className="flex justify-center mb-4">
+                            <LockClosedIcon className="h-16 w-16 text-purple-500 opacity-70" />
+                        </div>
+                        <h2 className="text-2xl font-bold text-purple-700 mb-4">
+                            Access Restricted
+                        </h2>
+                        <p className="text-gray-600 mb-4">
+                            As a Cool Kid, you do not have permission to view other users' details. 
+                            Upgrade your status to access more features.
+                        </p>
+                        <div className="flex justify-center space-x-2">
+                            <span className="text-sm text-gray-500">
+                                Current Role: Cool Kid
+                            </span>
+                        </div>
+                    </motion.div>
+                ) : currentUser && (users.length > 0 ? (
                     <UsersGrid users={users} />
                 ) : (
                     <div className="text-center text-gray-500 mt-12">
                         No users to display.
                     </div>
-                )}
+                ))}
             </div>
 
             <ToastContainer />
-            {/* <Footer /> */}
         </div>
     );
 };
