@@ -3,14 +3,11 @@ import { motion } from 'framer-motion';
 import {
   EnvelopeIcon,
   GlobeAltIcon,
-  CheckBadgeIcon,
+  CheckBadgeIcon
 } from '@heroicons/react/24/solid';
 import { getRoleConfig } from '../data/roles';
 
 function UsersGrid({ users }) {
-
-
-
   const truncateText = (text, maxLength = 20) => {
     if (text.length <= maxLength) return text;
     return `${text.substring(0, maxLength)}...`;
@@ -53,8 +50,10 @@ function UsersGrid({ users }) {
                 <div className="p-6">
                   {/* User Icon */}
                   <div className="flex justify-center mb-6 relative">
-                    <div className={`p-3 rounded-full border-2 border-gray-200 dark:border-gray-700
-                        ${roleConfig.color}`}>
+                    <div
+                      className={`p-3 rounded-full border-2 border-gray-200 dark:border-gray-700
+                        ${roleConfig.color}`}
+                    >
                       {roleConfig.icon}
                     </div>
                   </div>
@@ -122,7 +121,9 @@ function UsersGrid({ users }) {
                                                     text-sm font-medium ${roleConfig.color}`}
                         >
                           {roleConfig.icon}
-                          <span className="ml-2 text-purple-500 dark:text-purple-400">{user.role}</span>
+                          <span className="ml-2 text-purple-500 dark:text-purple-400">
+                            {user.role}
+                          </span>
                         </span>
                       </div>
                     )}

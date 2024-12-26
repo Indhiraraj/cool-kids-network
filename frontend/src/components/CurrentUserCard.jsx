@@ -9,7 +9,7 @@ import {
 import { getRoleConfig } from '../data/roles';
 
 function CurrentUserCard({ currentUser }) {
-    const roleConfig = getRoleConfig(currentUser.role);
+  const roleConfig = getRoleConfig(currentUser.role);
   return (
     <motion.div
       initial={{ scale: 0.9, opacity: 0 }}
@@ -30,7 +30,9 @@ function CurrentUserCard({ currentUser }) {
       >
         <div className="flex items-start sm:space-x-6">
           <div className="flex-shrink-0 hidden sm:block">
-            <div className={`p-3 rounded-full border-2 border-gray-200 dark:border-gray-700 ${roleConfig.color}`}>
+            <div
+              className={`p-3 rounded-full border-2 border-gray-200 dark:border-gray-700 ${roleConfig.color}`}
+            >
               {roleConfig.icon || (
                 <UserCircleIcon className="h-16 w-16 text-purple-500 dark:text-purple-400" />
               )}
@@ -68,7 +70,9 @@ function CurrentUserCard({ currentUser }) {
                                         text-sm font-medium ${roleConfig.color}`}
               >
                 {roleConfig.icon}
-                <span className="ml-2 text-purple-500 dark:text-purple-400">{currentUser.role}</span>
+                <span className="ml-2 text-purple-500 dark:text-purple-400">
+                  {currentUser.role}
+                </span>
               </div>
             )}
           </div>

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import {
   EnvelopeIcon,
   CheckBadgeIcon,
-  PencilIcon,
+  PencilIcon
 } from '@heroicons/react/24/solid';
 import { toast } from 'react-toastify';
 import { updateUser } from '../services/userApiService';
@@ -42,7 +42,6 @@ function MaintainerUsersGrid({ users, onUserUpdate }) {
       setLoading(false);
     }
   };
-
 
   if (loading) {
     return <LoadingScreen />;
@@ -95,7 +94,9 @@ function MaintainerUsersGrid({ users, onUserUpdate }) {
                 <div className="p-6">
                   {/* User Icon */}
                   <div className="flex justify-center mb-6 relative">
-                    <div className={`p-3 rounded-full border-2 border-gray-200 dark:border-gray-700 ${roleConfig.color}`}>
+                    <div
+                      className={`p-3 rounded-full border-2 border-gray-200 dark:border-gray-700 ${roleConfig.color}`}
+                    >
                       {roleConfig.icon}
                     </div>
                     <motion.button
@@ -127,19 +128,19 @@ function MaintainerUsersGrid({ users, onUserUpdate }) {
                     </h2>
 
                     <div
-                          className="p-3 rounded-lg border-2 border-gray-200 
+                      className="p-3 rounded-lg border-2 border-gray-200 
                                                     dark:border-gray-700 text-gray-600 dark:text-gray-300 
                                                     bg-gray-50 dark:bg-gray-700 
                                                     flex items-center justify-center"
-                        >
-                          <EnvelopeIcon className="h-5 w-5 mr-2 flex-shrink-0" />
-                          <span
-                            className="text-sm truncate max-w-[200px]"
-                            title={user.email}
-                          >
-                            {user.email}
-                          </span>
-                        </div>
+                    >
+                      <EnvelopeIcon className="h-5 w-5 mr-2 flex-shrink-0" />
+                      <span
+                        className="text-sm truncate max-w-[200px]"
+                        title={user.email}
+                      >
+                        {user.email}
+                      </span>
+                    </div>
 
                     <div className="pt-4 border-t border-gray-100 dark:border-gray-700">
                       <span
@@ -149,7 +150,9 @@ function MaintainerUsersGrid({ users, onUserUpdate }) {
                                                 text-sm font-medium ${roleConfig.color}`}
                       >
                         {roleConfig.icon}
-                        <span className="ml-2 text-purple-500 dark:text-purple-400">{user.role}</span>
+                        <span className="ml-2 text-purple-500 dark:text-purple-400">
+                          {user.role}
+                        </span>
                       </span>
                     </div>
                   </div>

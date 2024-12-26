@@ -56,11 +56,13 @@ function Header({ handleLogout }) {
   }, [isDarkMode]);
 
   if (!handleLogout) {
+    /* eslint-disable no-param-reassign */
     handleLogout = () => {
-        localStorage.removeItem('user');
-        localStorage.removeItem('maintainer');
-        navigate('/');
-    }
+      localStorage.removeItem('user');
+      localStorage.removeItem('maintainer');
+      navigate('/');
+    };
+    /* eslint-disable no-param-reassign */
   }
 
   const renderAuthButtons = (isMobile = false) => (
