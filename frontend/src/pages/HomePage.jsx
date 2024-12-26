@@ -84,6 +84,13 @@ function HomePage() {
     }
   }, [currentUser]);
 
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem('maintainer'))) {
+        
+        navigate("/maintainer")
+    }
+  },[])
+
   const handleLogout = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('maintainer');
