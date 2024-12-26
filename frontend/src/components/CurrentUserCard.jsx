@@ -6,8 +6,10 @@ import {
   GlobeAltIcon,
   CheckBadgeIcon
 } from '@heroicons/react/24/solid';
+import { getRoleConfig } from '../data/roles';
 
-function CurrentUserCard({ roles, currentUser }) {
+function CurrentUserCard({ currentUser }) {
+  const roleConfig = getRoleConfig(currentUser.role);
   return (
     <motion.div
       initial={{ scale: 0.9, opacity: 0 }}
@@ -28,8 +30,10 @@ function CurrentUserCard({ roles, currentUser }) {
       >
         <div className="flex items-start sm:space-x-6">
           <div className="flex-shrink-0 hidden sm:block">
-            <div className="p-3 rounded-full border-2 border-gray-200 dark:border-gray-700">
-              {roles.find((r) => r.value === currentUser.role)?.icon || (
+            <div
+              className={`p-3 rounded-full border-2 border-gray-200 dark:border-gray-700 ${roleConfig.color}`}
+            >
+              {roleConfig.icon || (
                 <UserCircleIcon className="h-16 w-16 text-purple-500 dark:text-purple-400" />
               )}
             </div>
@@ -61,12 +65,14 @@ function CurrentUserCard({ roles, currentUser }) {
 
             {currentUser.role && (
               <div
-                className="inline-flex items-center px-4 py-2 rounded-full
-                                        border-2 border-gray-200 dark:border-gray-700 text-purple-500 dark:text-purple-400
-                                        text-sm font-medium"
+                className={`inline-flex items-center px-4 py-2 rounded-full
+                                        border-2 border-gray-200 dark:border-gray-700 
+                                        text-sm font-medium ${roleConfig.color}`}
               >
-                {roles.find((r) => r.value === currentUser.role)?.icon}
-                <span className="ml-2">{currentUser.role}</span>
+                {roleConfig.icon}
+                <span className="ml-2 text-purple-500 dark:text-purple-400">
+                  {currentUser.role}
+                </span>
               </div>
             )}
           </div>

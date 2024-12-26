@@ -3,37 +3,11 @@ import { motion } from 'framer-motion';
 import {
   EnvelopeIcon,
   GlobeAltIcon,
-  CheckBadgeIcon,
-  UserIcon,
-  FireIcon,
-  SparklesIcon
+  CheckBadgeIcon
 } from '@heroicons/react/24/solid';
+import { getRoleConfig } from '../data/roles';
 
 function UsersGrid({ users }) {
-  const roles = [
-    {
-      value: 'Cool Kid',
-      icon: (
-        <UserIcon className="h-6 w-6 text-purple-500 dark:text-purple-400" />
-      )
-    },
-    {
-      value: 'Cooler Kid',
-      icon: (
-        <FireIcon className="h-6 w-6 text-purple-500 dark:text-purple-400" />
-      )
-    },
-    {
-      value: 'Coolest Kid',
-      icon: (
-        <SparklesIcon className="h-6 w-6 text-purple-500 dark:text-purple-400" />
-      )
-    }
-  ];
-
-  const getRoleConfig = (role) =>
-    roles.find((r) => r.value === role) || roles[0];
-
   const truncateText = (text, maxLength = 20) => {
     if (text.length <= maxLength) return text;
     return `${text.substring(0, maxLength)}...`;
@@ -76,7 +50,10 @@ function UsersGrid({ users }) {
                 <div className="p-6">
                   {/* User Icon */}
                   <div className="flex justify-center mb-6 relative">
-                    <div className="p-3 rounded-full border-2 border-gray-200 dark:border-gray-700">
+                    <div
+                      className={`p-3 rounded-full border-2 border-gray-200 dark:border-gray-700
+                        ${roleConfig.color}`}
+                    >
                       {roleConfig.icon}
                     </div>
                   </div>
@@ -138,13 +115,15 @@ function UsersGrid({ users }) {
                                                 flex justify-center"
                       >
                         <span
-                          className="inline-flex items-center px-4 py-2 rounded-full
+                          className={`inline-flex items-center px-4 py-2 rounded-full
                                                     border-2 border-gray-200 dark:border-gray-700 
-                                                    text-purple-500 dark:text-purple-400
-                                                    text-sm font-medium"
+                                                    
+                                                    text-sm font-medium ${roleConfig.color}`}
                         >
                           {roleConfig.icon}
-                          <span className="ml-2">{user.role}</span>
+                          <span className="ml-2 text-purple-500 dark:text-purple-400">
+                            {user.role}
+                          </span>
                         </span>
                       </div>
                     )}

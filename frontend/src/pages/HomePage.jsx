@@ -86,10 +86,9 @@ function HomePage() {
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem('maintainer'))) {
-        
-        navigate("/maintainer")
+      navigate('/maintainer');
     }
-  },[])
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('user');
@@ -119,7 +118,7 @@ function HomePage() {
         </motion.div>
 
         {currentUser ? (
-          <CurrentUserCard roles={roles} currentUser={currentUser} />
+          <CurrentUserCard currentUser={currentUser} />
         ) : (
           <WelcomeSection />
         )}
