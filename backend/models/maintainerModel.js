@@ -1,11 +1,11 @@
-import mongoose from "mongoose";
-import { Schema } from "mongoose";
+import mongoose from 'mongoose';
+import { Schema } from 'mongoose';
 
 const maintainerSchema = new Schema({
-    email: {type: String, required: true},
-    password: {type: String, required: true}
-})
+  email: { type: String, required: true },
+  password: { type: String, required: true }
+});
 
-const maintainerModel = mongoose.model("maintainer", maintainerSchema);
+const MaintainerModel = mongoose.model('maintainer', maintainerSchema);
 
-export default maintainerModel;
+export default MaintainerModel;

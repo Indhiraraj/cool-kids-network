@@ -1,0 +1,174 @@
+{
+    "extends": [
+        "airbnb",
+        "prettier"
+    ],
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module",
+        "babelOptions": {
+            "presets": [
+                "@babel/preset-react"
+            ]
+        },
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "parserOpts": {
+            "plugins": [
+                "jsx"
+            ]
+        },
+        "requireConfigFile": false
+    },
+    "env": {
+        "browser": true,
+        "node": true,
+        "jest": true
+    },
+    "rules": {
+        "linebreak-style": 0,
+        "react/jsx-uses-react": 0,
+        "no-return-await": 0,
+        "react/jsx-props-no-spreading": 0,
+        "jsx-a11y/label-has-associated-control": 0,
+        "react/react-in-jsx-scope": 0,
+        "import/prefer-default-export": 0,
+        "react/no-array-index-key": 0,
+        "react/prop-types": 0,
+        "react/no-multi-comp": 0,
+        "import/default": 0,
+        "import/extensions": 0,
+        "import/no-duplicates": 0,
+        "import/named": 0,
+        "import/namespace": 0,
+        "import/no-unresolved": 0,
+        "import/no-named-as-default": 0,
+        "import/no-named-as-default-member": 0,
+        "comma-dangle": 0, // not sure why airbnb turned this on. gross!
+        "indent": 0,
+        "no-console": 0,
+        "no-alert": 0,
+        "no-underscore-dangle": 0,
+        "no-useless-catch": 2,
+        "max-len": [
+            1,
+            150,
+            2,
+            {
+                "ignoreComments": true,
+                "ignoreTemplateLiterals": true
+            }
+        ],
+        "quote-props": [
+            1,
+            "as-needed"
+        ],
+        "no-unused-vars": [
+            1,
+            {
+                "vars": "local",
+                "args": "none"
+            }
+        ],
+        "consistent-return": [
+            "error",
+            {
+                "treatUndefinedAsUnspecified": true
+            }
+        ],
+        "no-param-reassign": [
+            2,
+            {
+                "props": false
+            }
+        ],
+        "react/self-closing-comp": [
+            "error",
+            {
+                "component": true,
+                "html": false
+            }
+        ],
+        "newline-per-chained-call": 0,
+        "react/prefer-stateless-function": [
+            2,
+            {
+                "ignorePureComponents": true
+            }
+        ],
+        "class-methods-use-this": 0,
+        "react/jsx-no-bind": [
+            2,
+            {
+                "allowBind": true,
+                "allowArrowFunctions": true
+            }
+        ],
+        "no-return-assign": [
+            2,
+            "except-parens"
+        ],
+        "jsx-a11y/anchor-is-valid": [
+            "error",
+            {
+                "components": [
+                    "Link"
+                ],
+                "specialLink": [
+                    "to"
+                ]
+            }
+        ],
+        "jsx-a11y/label-has-for": [
+            2,
+            {
+                "components": [
+                    "Label"
+                ],
+                "required": {
+                    "every": [
+                        "id"
+                    ]
+                },
+                "allowChildren": false
+            }
+        ],
+        "prettier/prettier": [
+            "error"
+        ]
+    },
+    "plugins": [
+        "react",
+        "jsx-a11y",
+        "import",
+        "prettier"
+    ],
+    "settings": {
+        "import/parser": "@babel/eslint-parser",
+        "import/resolve": {
+            "moduleDirectory": [
+                "node_modules"
+            ]
+        }
+    },
+    "globals": {
+        "__DEVELOPMENT__": true,
+        "__BACKEND__": true,
+        "__FRONTEND__": true,
+        "__DISABLE_SSR__": true,
+        "__DEVTOOLS__": true
+    },
+    "overrides": [
+        {
+            "files": [
+                "eslint.config.js",
+                "vite.config.js"
+            ],
+            "rules": {
+                "import/no-extraneous-dependencies": "off"
+            }
+        }
+    ]
+}
