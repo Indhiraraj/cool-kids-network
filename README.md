@@ -3,7 +3,7 @@
 ## Development Setup
 
 ### Prerequisites
-- Node.js v14+
+- Node.js v18+
 - MongoDB
 - npm or yarn
 
