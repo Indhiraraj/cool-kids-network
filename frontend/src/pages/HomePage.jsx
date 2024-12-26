@@ -17,6 +17,7 @@ import {
 import UsersGrid from "../components/UsersGrid";
 import WelcomeSection from "../components/WelcomeSection";
 import Loading from "../components/Loading";
+import CurrentUserCard from "../components/CurrentUserCard";
 
 const HomePage = () => {
     const location = useLocation();
@@ -80,7 +81,7 @@ const HomePage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-100">
+        <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
             <Header handleLogout={handleLogout} />
 
             <div className="container mx-auto px-4 py-8">
@@ -90,101 +91,37 @@ const HomePage = () => {
                     transition={{ duration: 0.6 }}
                     className="text-center mb-12"
                 >
-                    <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-purple-600 mb-4">
+                    <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-purple-600 dark:from-purple-400 dark:to-purple-500 mb-4">
                         Welcome to Cool Kids Network!
                     </h1>
-                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                    <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
                         Connect, Collaborate, and Grow Together
                     </p>
                 </motion.div>
 
                 {currentUser ? (
-                    <motion.div
-                        initial={{ scale: 0.9, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ duration: 0.5 }}
-                        className="max-w-xl mx-auto mb-12"
-                    >
-                        <motion.div
-                            whileHover={{
-                                scale: 1.02,
-                                transition: { duration: 0.2 }
-                            }}
-                            className="relative bg-white rounded-2xl
-                border-2 border-purple-200
-                shadow-lg hover:shadow-xl
-                transition-all duration-300
-                overflow-hidden p-6"
-                        >
-                            <div className="flex items-start sm:space-x-6">
-                                {/* User Icon */}
-                                <div className="flex-shrink-0 hidden sm:block">
-                                    <div className="p-3 rounded-full border-2 border-purple-200">
-                                        {roles.find(r => r.value === currentUser.role)?.icon ||
-                                            <UserCircleIcon className="h-16 w-16 text-purple-500" />}
-                                    </div>
-                                </div>
-
-                                {/* User Info */}
-                                <div className="flex-grow space-y-4">
-                                    <h2 className="text-xl font-bold text-gray-800 flex items-center">
-                                        {currentUser.first_name} {currentUser.last_name}
-                                        <CheckBadgeIcon className="h-5 w-5 ml-2 text-purple-500" />
-                                    </h2>
-
-                                    <div className="space-y-2">
-                                        <div className="p-3 rounded-lg border-2 border-purple-200 bg-gray-50">
-                                            <div className="flex items-center text-gray-600">
-                                                <EnvelopeIcon className="h-5 w-5 mr-2" />
-                                                <span className="text-sm">{currentUser.email}</span>
-                                            </div>
-                                        </div>
-
-                                        {currentUser.country && (
-                                            <div className="p-3 rounded-lg border-2 border-purple-200 bg-gray-50">
-                                                <div className="flex items-center text-gray-600">
-                                                    <GlobeAltIcon className="h-5 w-5 mr-2" />
-                                                    <span className="text-sm">{currentUser.country}</span>
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    {currentUser.role && (
-                                        <div className="inline-flex items-center px-4 py-2 rounded-full
-                                    border-2 border-purple-200 text-purple-500
-                                    text-sm font-medium">
-                                            {roles.find(r => r.value === currentUser.role)?.icon}
-                                            <span className="ml-2">{currentUser.role}</span>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </motion.div>
-                    </motion.div>
-                ) :
-                    <WelcomeSection />
-                }
+                    <CurrentUserCard roles={roles} currentUser={currentUser} />
+                ) : <WelcomeSection />}
 
                 {currentUser && accessDenied ? (
                     <motion.div
                         initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
-                        className="max-w-md mx-auto bg-white rounded-2xl shadow-lg p-6 text-center"
+                        className="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 text-center"
                     >
                         <div className="flex justify-center mb-4">
-                            <LockClosedIcon className="h-16 w-16 text-purple-500 opacity-70" />
+                            <LockClosedIcon className="h-16 w-16 text-purple-500 dark:text-purple-400 opacity-70" />
                         </div>
-                        <h2 className="text-2xl font-bold text-purple-700 mb-4">
+                        <h2 className="text-2xl font-bold text-purple-700 dark:text-purple-400 mb-4">
                             Access Restricted
                         </h2>
-                        <p className="text-gray-600 mb-4">
+                        <p className="text-gray-600 dark:text-gray-300 mb-4">
                             As a Cool Kid, you do not have permission to view other users' details.
                             Upgrade your status to access more features.
                         </p>
                         <div className="flex justify-center space-x-2">
-                            <span className="text-sm text-gray-500">
+                            <span className="text-sm text-gray-500 dark:text-gray-400">
                                 Current Role: Cool Kid
                             </span>
                         </div>
@@ -192,7 +129,7 @@ const HomePage = () => {
                 ) : currentUser && (users.length > 0 ? (
                     <UsersGrid users={users} />
                 ) : loading ? <Loading /> : (
-                    <div className="text-center text-gray-500 mt-12">
+                    <div className="text-center text-gray-500 dark:text-gray-400 mt-12">
                         No users to display.
                     </div>
                 ))}
@@ -205,7 +142,7 @@ const HomePage = () => {
                 closeOnClick
                 pauseOnHover={false}
                 draggable
-                className="!fixed !bottom-4 !right-2 !left-auto !top-auto !w-auto !max-w-[90vw] md:!max-w-sm"
+                className="!fixed !bottom-4 !right-2 !left-auto !top-auto !w-auto !max-w-[90vw] md:!max-w-sm dark:bg-gray-700 text-green-600"
             />
         </div>
     );

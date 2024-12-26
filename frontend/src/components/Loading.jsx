@@ -20,7 +20,7 @@ const Loading = () => {
                 }}
                 className="mb-8 flex justify-center"
             >
-                <div className="h-10 bg-gray-200 rounded-lg w-64 sm:w-[500px]" />
+                <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded-lg w-64 sm:w-[500px]" />
             </motion.div>
             <motion.div
                 initial={{ opacity: 0 }}
@@ -47,24 +47,31 @@ const Loading = () => {
                                 repeat: Infinity,
                                 ease: "easeInOut"
                             }}
-                            className="bg-white rounded-2xl border-2 border-purple-100 overflow-hidden h-[250px]"
+                            className="bg-white dark:bg-gray-800 rounded-2xl 
+                                border-2 border-purple-100 dark:border-purple-900 
+                                overflow-hidden h-[250px]"
                         >
                             <div className="p-6 flex flex-col h-full space-y-4">
                                 {/* Avatar placeholder */}
                                 <div className="flex justify-center">
-                                    <div className="w-16 h-16 rounded-full bg-purple-100" />
+                                    <div className="w-16 h-16 rounded-full 
+                                        bg-purple-100 dark:bg-purple-900/50" />
                                 </div>
 
                                 {/* Content placeholders */}
                                 <div className="space-y-4">
-                                    <div className="h-6 bg-purple-100 rounded-full w-3/4 mx-auto" />
-                                    <div className="h-4 bg-purple-100 rounded-full w-full" />
-                                    <div className="h-4 bg-purple-100 rounded-full w-5/6 mx-auto" />
+                                    <div className="h-6 bg-purple-100 dark:bg-purple-900/50 
+                                        rounded-full w-3/4 mx-auto" />
+                                    <div className="h-4 bg-purple-100 dark:bg-purple-900/50 
+                                        rounded-full w-full" />
+                                    <div className="h-4 bg-purple-100 dark:bg-purple-900/50 
+                                        rounded-full w-5/6 mx-auto" />
                                 </div>
 
                                 {/* Role badge placeholder */}
                                 <div className="flex justify-center mt-auto">
-                                    <div className="h-6 bg-purple-100 rounded-full w-1/2" />
+                                    <div className="h-6 bg-purple-100 dark:bg-purple-900/50 
+                                        rounded-full w-1/2" />
                                 </div>
                             </div>
                         </motion.div>

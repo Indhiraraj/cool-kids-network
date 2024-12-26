@@ -49,12 +49,12 @@ const SignInPage = () => {
     };
 
     return (
-        <>
+        <div className="min-h-[85vh] bg-gray-100 dark:bg-gray-900">
             <Header />
             {
                 loading ? <LoadingScreen /> :
                     <>
-                        <div className="flex items-center justify-center min-h-[80vh] bg-gray-100 p-4">
+                        <div className="flex items-center justify-center mt-14 p-4">
                             <Form title={"Sign In"} handleSubmit={handleLogin} email={email} setEmail={setEmail} password={password} setPassword={setPassword} isMaintainer={isMaintainer} setIsMaintainer={setIsMaintainer} />
 
                         </div>
@@ -71,7 +71,7 @@ const SignInPage = () => {
             />
 
 
-        </>
+        </div>
 
     );
 };

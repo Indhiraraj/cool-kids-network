@@ -57,7 +57,7 @@ const MaintainerPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-100">
+        <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
             <Header handleLogout={handleLogout} />
 
             <div className="container mx-auto px-4 py-8">

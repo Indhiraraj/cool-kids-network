@@ -11,27 +11,30 @@ import {
 } from '@heroicons/react/24/solid';
 import { updateUser } from '../services/userApiService';
 import { toast } from 'react-toastify';
+import LoadingScreen from './LoadinScreen';
 
 const MaintainerUsersGrid = ({ users, onUserUpdate }) => {
     const [selectedUser, setSelectedUser] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const roles = [
         { 
             value: "Cool Kid", 
-            icon: <UserIcon className="h-6 w-6 text-purple-500" />,
+            icon: <UserIcon className="h-6 w-6 text-purple-500 dark:text-purple-400" />,
         },
         { 
             value: "Cooler Kid", 
-            icon: <FireIcon className="h-6 w-6 text-purple-500" />,
+            icon: <FireIcon className="h-6 w-6 text-purple-500 dark:text-purple-400" />,
         },
         { 
             value: "Coolest Kid", 
-            icon: <SparklesIcon className="h-6 w-6 text-purple-500" />,
+            icon: <SparklesIcon className="h-6 w-6 text-purple-500 dark:text-purple-400" />,
         }
     ];
 
     const handleRoleUpdate = async (user, newRole) => {
         try {
+            setLoading(true);
             const maintainer = JSON.parse(localStorage.getItem('maintainer'));
             await updateUser({
                 email: user.email,
@@ -46,11 +49,18 @@ const MaintainerUsersGrid = ({ users, onUserUpdate }) => {
             const message = `Failed to update role: ${error.message}`;
             toast(message, {type: 'error', position: 'bottom-right', autoClose: 2000});
         }
+        finally{
+            setLoading(false)
+        }
     };
 
     const getRoleConfig = (role) => {
         return roles.find(r => r.value === role) || roles[0];
     };
+
+    if (loading) {
+        return <LoadingScreen />
+    }
 
     return (
         <motion.div 
@@ -59,7 +69,9 @@ const MaintainerUsersGrid = ({ users, onUserUpdate }) => {
             transition={{ duration: 0.7 }}
             className="container mx-auto py-8 px-4 min-h-screen"
         >
-            <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-purple-900 mb-8 text-center">
+            <h1 className="text-4xl font-extrabold text-transparent bg-clip-text 
+                bg-gradient-to-r from-purple-600 to-purple-900 
+                dark:from-purple-400 dark:to-purple-600 mb-8 text-center">
                 Community Members Management
             </h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
@@ -81,8 +93,8 @@ const MaintainerUsersGrid = ({ users, onUserUpdate }) => {
                                     transition: { duration: 0.2 }
                                 } : {}}
                                 className={`
-                                    relative bg-white rounded-2xl
-                                    border-2 border-purple-200
+                                    relative bg-white dark:bg-gray-800 rounded-2xl
+                                    border-2 border-none dark:border-none
                                     shadow-lg hover:shadow-xl
                                     transition-all duration-300
                                     overflow-hidden
@@ -91,41 +103,46 @@ const MaintainerUsersGrid = ({ users, onUserUpdate }) => {
                                 <div className="p-6">
                                     {/* User Icon */}
                                     <div className="flex justify-center mb-6 relative">
-                                        <div className="p-3 rounded-full border-2 border-purple-200">
+                                        <div className="p-3 rounded-full border-2 border-gray-200 dark:border-gray-700">
                                             {roleConfig.icon}
                                         </div>
                                         <motion.button
                                             whileHover={{ scale: 1.1 }}
                                             whileTap={{ scale: 0.9 }}
-                                            className="absolute -top-2 -right-2 p-2 rounded-full bg-white
-                                                     border-2 border-purple-200 hover:shadow-lg
-                                                     transition-all duration-300"
+                                            className="absolute -top-2 -right-2 p-2 rounded-full 
+                                                bg-white dark:bg-gray-700
+                                                border-2 border-gray-200 dark:border-gray-700
+                                                hover:shadow-lg
+                                                transition-all duration-300"
                                             onClick={() => setSelectedUser(
                                                 selectedUser?.email === user.email ? null : user
                                             )}
                                         >
-                                            <PencilIcon className="h-4 w-4 text-purple-500" />
+                                            <PencilIcon className="h-4 w-4 text-purple-500 dark:text-purple-400" />
                                         </motion.button>
                                     </div>
 
                                     {/* User Info */}
                                     <div className="text-center space-y-4">
-                                        <h2 className="text-xl font-bold text-gray-800 flex items-center justify-center">
+                                        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200 
+                                            flex items-center justify-center">
                                             {user.first_name} {user.last_name}
-                                            <CheckBadgeIcon className="h-5 w-5 ml-2 text-purple-500" />
+                                            <CheckBadgeIcon className="h-5 w-5 ml-2 text-purple-500 dark:text-purple-400" />
                                         </h2>
 
-                                        <div className="p-3 rounded-lg border-2 border-purple-200 bg-gray-50">
-                                            <div className="flex items-center justify-center text-gray-600">
+                                        <div className="p-3 rounded-lg border-2 border-gray-200 dark:border-gray-700
+                                            bg-gray-50 dark:bg-gray-700">
+                                            <div className="flex items-center justify-center text-gray-600 dark:text-gray-300">
                                                 <EnvelopeIcon className="h-5 w-5 mr-2" />
                                                 <span className="text-sm">{user.email}</span>
                                             </div>
                                         </div>
 
-                                        <div className="pt-4 border-t border-gray-100">
+                                        <div className="pt-4 border-t border-gray-100 dark:border-gray-700">
                                             <span className="inline-flex items-center px-4 py-2 rounded-full
-                                                         border-2 border-purple-200 text-purple-500
-                                                         text-sm font-medium">
+                                                border-2 border-gray-200 dark:border-gray-700
+                                                text-purple-500 dark:text-purple-400
+                                                text-sm font-medium">
                                                 {roleConfig.icon}
                                                 <span className="ml-2">{user.role}</span>
                                             </span>
@@ -139,9 +156,10 @@ const MaintainerUsersGrid = ({ users, onUserUpdate }) => {
                                 <motion.div
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    className="absolute inset-0 bg-white rounded-2xl p-6 shadow-xl border-2 border-purple-200 z-10"
+                                    className="absolute inset-0 bg-white dark:bg-gray-800 rounded-2xl p-6 
+                                        shadow-xl border-2 border-gray-200 dark:border-gray-700 z-10"
                                 >
-                                    <h3 className="text-xl font-bold text-gray-800 text-center mb-6">
+                                    <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 text-center mb-6">
                                         Update Role
                                     </h3>
                                     <div className="grid grid-cols-3 gap-4">
@@ -153,16 +171,16 @@ const MaintainerUsersGrid = ({ users, onUserUpdate }) => {
                                                 onClick={() => handleRoleUpdate(user, role.value)}
                                                 className={`
                                                     p-4 rounded-xl text-center flex flex-col items-center
-                                                    border-2 border-purple-200
+                                                    border-2 border-gray-200 dark:border-gray-700
                                                     transition-all duration-300
                                                     ${user.role === role.value 
-                                                        ? 'bg-purple-50' 
-                                                        : 'bg-white hover:bg-gray-50'
+                                                        ? 'bg-purple-50 dark:bg-purple-900/30' 
+                                                        : 'bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'
                                                     }
                                                 `}
                                             >
                                                 {role.icon}
-                                                <span className="text-xs font-medium text-gray-600 mt-2">
+                                                <span className="text-xs font-medium text-gray-600 dark:text-gray-300 mt-2">
                                                     {role.value}
                                                 </span>
                                             </motion.button>
@@ -172,9 +190,12 @@ const MaintainerUsersGrid = ({ users, onUserUpdate }) => {
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.98 }}
                                         onClick={() => setSelectedUser(null)}
-                                        className="mt-6 w-full py-3 rounded-xl bg-red-50 text-red-600
-                                                 border-2 border-red-200 hover:bg-red-100
-                                                 transition-all duration-200"
+                                        className="mt-6 w-full py-3 rounded-xl 
+                                            bg-red-50 dark:bg-red-900/20 
+                                            text-red-600 dark:text-red-400
+                                            border-2 border-red-200 dark:border-red-800 
+                                            hover:bg-red-100 dark:hover:bg-red-900/30
+                                            transition-all duration-200"
                                     >
                                         Cancel
                                     </motion.button>

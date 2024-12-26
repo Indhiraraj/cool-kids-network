@@ -3,12 +3,13 @@ import './App.css';
 import HomePage from './pages/HomePage';
 import SignUpPage from './pages/SignUpPage';
 import SignInPage from './pages/SignInPage';
-import UserUpdatePage from './pages/UserUpdatePage';
 import ProtectedRoute from './components/ProtectedRoute';
 import MaintainerPage from './pages/MaintainerPage';
 import Footer from './components/Footer';
+import useSystemTheme from './hooks/useSystemTheme';
 
 function App() {
+  useSystemTheme();
   return (
     <>
       <BrowserRouter>
@@ -16,14 +17,6 @@ function App() {
           <Route path="/" Component={HomePage} />
           <Route path="/sign-up" Component={SignUpPage} />
           <Route path="/sign-in" Component={SignInPage} />
-          <Route
-            path="/update-user"
-            element={
-              <ProtectedRoute role='role'>
-                <UserUpdatePage />
-              </ProtectedRoute>
-            }
-          />
           <Route
             path="/maintainer"
             element={
