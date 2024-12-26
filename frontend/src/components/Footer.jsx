@@ -11,7 +11,7 @@ const Footer = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-white border-t border-purple-100 mt-auto"
+            className="bg-white dark:bg-gray-900 border-t border-purple-100 dark:border-purple-900 mt-auto"
         >
             <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
                 <div className="flex flex-col items-center justify-center space-y-4">
@@ -31,9 +31,11 @@ const Footer = () => {
                                 repeatType: "reverse"
                             }}
                         >
-                            <CodeBracketIcon className="h-8 w-8 text-purple-500" />
+                            <CodeBracketIcon className="h-8 w-8 text-purple-500 dark:text-purple-400" />
                         </motion.div>
-                        <span className="text-2xl font-bold text-purple-600 cursor-default">Cool Kids Network</span>
+                        <span className="text-2xl font-bold text-purple-600 dark:text-purple-400 cursor-default">
+                            Cool Kids Network
+                        </span>
                     </motion.div>
 
                     {/* Copyright */}
@@ -43,7 +45,9 @@ const Footer = () => {
                         transition={{ delay: 0.5, duration: 0.5 }}
                         className="flex items-center space-x-2"
                     >
-                        <span className="text-sm text-gray-500">Made with</span>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">
+                            Made with
+                        </span>
                         <motion.div
                             animate={{ 
                                 scale: [1, 1.2, 1],
@@ -54,9 +58,11 @@ const Footer = () => {
                                 repeatType: "reverse"
                             }}
                         >
-                            <HeartIcon className="h-5 w-5 text-purple-500" />
+                            <HeartIcon className="h-5 w-5 text-purple-500 dark:text-purple-400" />
                         </motion.div>
-                        <span className="text-sm text-gray-500">by the Cool Kids Network Team</span>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">
+                            by the Cool Kids Network Team
+                        </span>
                     </motion.div>
                 </div>
             </div>

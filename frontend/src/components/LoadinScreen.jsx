@@ -1,83 +1,53 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CodeBracketIcon } from '@heroicons/react/24/outline';
 
 const LoadingScreen = () => {
-    const iconVariants = {
-        initial: { 
-            scale: 0.8,
-            opacity: 0.5,
-            rotate: 0
-        },
-        animate: {
-            scale: [0.8, 1.1, 0.9],
-            opacity: [0.5, 1, 0.8],
-            rotate: 360,
-            transition: {
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-            }
-        }
-    };
-
-    const textVariants = {
-        initial: { opacity: 0, y: 20 },
-        animate: {
-            opacity: [0, 1, 0],
-            y: 0,
-            transition: {
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-            }
-        }
-    };
-
     return (
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 flex flex-col items-center justify-center bg-white bg-opacity-90 z-50"
+            className="fixed inset-0 flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-900"
         >
-            <div className="relative">
-                {/* Background glow */}
+            <div className="relative w-24 h-24">
                 <motion.div
                     animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.3, 0.5, 0.3]
+                        rotate: 360
                     }}
                     transition={{
                         duration: 2,
                         repeat: Infinity,
-                        ease: "easeInOut"
+                        ease: "linear"
                     }}
-                    className="absolute inset-0 bg-purple-300 rounded-full blur-xl"
-                />
-
-                {/* Icon */}
-                <motion.div
-                    variants={iconVariants}
-                    initial="initial"
-                    animate="animate"
-                    className="relative"
+                    className="absolute inset-0"
                 >
-                    <CodeBracketIcon className="w-16 h-16 text-purple-600" />
+                    <div className="absolute top-0 left-1/2 w-3 h-3 -ml-1.5 bg-purple-600 dark:bg-purple-400 rounded-full" />
                 </motion.div>
+                <motion.div
+                    animate={{
+                        rotate: -360
+                    }}
+                    transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "linear"
+                    }}
+                    className="absolute inset-0 border-4 border-purple-200 dark:border-purple-800 rounded-full"
+                />
             </div>
-
-            {/* Loading text */}
-            <motion.p
-                variants={textVariants}
-                initial="initial"
-                animate="animate"
-                className="mt-6 text-lg font-medium text-purple-600"
+            <motion.div
+                animate={{
+                    opacity: [0.5, 1, 0.5]
+                }}
+                transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                }}
+                className="mt-6 text-purple-600 dark:text-purple-400 font-medium"
             >
                 Loading...
-            </motion.p>
+            </motion.div>
         </motion.div>
     );
 };
-
 export default LoadingScreen;

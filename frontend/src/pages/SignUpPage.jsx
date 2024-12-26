@@ -27,10 +27,10 @@ const SignUpPage = () => {
     };
 
     return (
-        <>
+        <div className="min-h-[85vh] bg-gray-100 dark:bg-gray-900">
             <Header />
             {loading ? <LoadingScreen /> : <>
-                <div className="flex items-center justify-center min-h-[80vh] bg-gray-100 p-4">
+                <div className="flex items-center justify-center p-4 mt-16">
                     <Form title={"Sign Up"} email={email} setEmail={setEmail} password={password} setPassword={setPassword} handleSubmit={handleRegister} />
 
                 </div>
@@ -44,7 +44,7 @@ const SignUpPage = () => {
                 draggable
                 className="!fixed !bottom-4 !right-2 !left-auto !top-auto !w-auto !max-w-[90vw] md:!max-w-sm"
             />
-        </>
+        </div>
 
     );
 };
