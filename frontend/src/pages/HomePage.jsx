@@ -119,7 +119,7 @@ function HomePage() {
         </motion.div>
 
         {currentUser ? (
-          <CurrentUserCard roles={roles} currentUser={currentUser} />
+          <CurrentUserCard currentUser={currentUser} />
         ) : (
           <WelcomeSection />
         )}

@@ -1,42 +1,18 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  UserCircleIcon,
   EnvelopeIcon,
   CheckBadgeIcon,
   PencilIcon,
-  UserIcon,
-  FireIcon,
-  SparklesIcon
 } from '@heroicons/react/24/solid';
 import { toast } from 'react-toastify';
 import { updateUser } from '../services/userApiService';
 import LoadingScreen from './LoadinScreen';
+import { roles, getRoleConfig } from '../data/roles';
 
 function MaintainerUsersGrid({ users, onUserUpdate }) {
   const [selectedUser, setSelectedUser] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  const roles = [
-    {
-      value: 'Cool Kid',
-      icon: (
-        <UserIcon className="h-6 w-6 text-purple-500 dark:text-purple-400" />
-      )
-    },
-    {
-      value: 'Cooler Kid',
-      icon: (
-        <FireIcon className="h-6 w-6 text-purple-500 dark:text-purple-400" />
-      )
-    },
-    {
-      value: 'Coolest Kid',
-      icon: (
-        <SparklesIcon className="h-6 w-6 text-purple-500 dark:text-purple-400" />
-      )
-    }
-  ];
 
   const handleRoleUpdate = async (user, newRole) => {
     try {
@@ -67,8 +43,6 @@ function MaintainerUsersGrid({ users, onUserUpdate }) {
     }
   };
 
-  const getRoleConfig = (role) =>
-    roles.find((r) => r.value === role) || roles[0];
 
   if (loading) {
     return <LoadingScreen />;
@@ -121,7 +95,7 @@ function MaintainerUsersGrid({ users, onUserUpdate }) {
                 <div className="p-6">
                   {/* User Icon */}
                   <div className="flex justify-center mb-6 relative">
-                    <div className="p-3 rounded-full border-2 border-gray-200 dark:border-gray-700">
+                    <div className={`p-3 rounded-full border-2 border-gray-200 dark:border-gray-700 ${roleConfig.color}`}>
                       {roleConfig.icon}
                     </div>
                     <motion.button
@@ -153,24 +127,29 @@ function MaintainerUsersGrid({ users, onUserUpdate }) {
                     </h2>
 
                     <div
-                      className="p-3 rounded-lg border-2 border-gray-200 dark:border-gray-700
-                                            bg-gray-50 dark:bg-gray-700"
-                    >
-                      <div className="flex items-center justify-center text-gray-600 dark:text-gray-300">
-                        <EnvelopeIcon className="h-5 w-5 mr-2" />
-                        <span className="text-sm">{user.email}</span>
-                      </div>
-                    </div>
+                          className="p-3 rounded-lg border-2 border-gray-200 
+                                                    dark:border-gray-700 text-gray-600 dark:text-gray-300 
+                                                    bg-gray-50 dark:bg-gray-700 
+                                                    flex items-center justify-center"
+                        >
+                          <EnvelopeIcon className="h-5 w-5 mr-2 flex-shrink-0" />
+                          <span
+                            className="text-sm truncate max-w-[200px]"
+                            title={user.email}
+                          >
+                            {user.email}
+                          </span>
+                        </div>
 
                     <div className="pt-4 border-t border-gray-100 dark:border-gray-700">
                       <span
-                        className="inline-flex items-center px-4 py-2 rounded-full
+                        className={`inline-flex items-center px-4 py-2 rounded-full
                                                 border-2 border-gray-200 dark:border-gray-700
-                                                text-purple-500 dark:text-purple-400
-                                                text-sm font-medium"
+                                                
+                                                text-sm font-medium ${roleConfig.color}`}
                       >
                         {roleConfig.icon}
-                        <span className="ml-2">{user.role}</span>
+                        <span className="ml-2 text-purple-500 dark:text-purple-400">{user.role}</span>
                       </span>
                     </div>
                   </div>
@@ -199,6 +178,7 @@ function MaintainerUsersGrid({ users, onUserUpdate }) {
                                                     p-4 rounded-xl text-center flex flex-col items-center
                                                     border-2 border-gray-200 dark:border-gray-700
                                                     transition-all duration-300
+                                                    ${role.color}
                                                     ${
                                                       user.role === role.value
                                                         ? 'bg-purple-50 dark:bg-purple-900/30'

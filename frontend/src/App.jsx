@@ -8,6 +8,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import MaintainerPage from './pages/MaintainerPage';
 import Footer from './components/Footer';
 import useSystemTheme from './hooks/useSystemTheme';
+import UserUpdatePage from './pages/UserUpdatePage';
 
 function App() {
   useSystemTheme();
@@ -23,6 +24,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <MaintainerPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/update-role"
+            element={
+              <ProtectedRoute>
+                <UserUpdatePage />
               </ProtectedRoute>
             }
           />

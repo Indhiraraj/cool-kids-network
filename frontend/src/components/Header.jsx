@@ -45,10 +45,6 @@ function Header({ handleLogout }) {
     }
   };
 
-  // const toggleTheme = () => {
-  //     setIsDarkMode(!isDarkMode);
-  // };
-
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
@@ -58,6 +54,14 @@ function Header({ handleLogout }) {
       localStorage.setItem('theme', 'light');
     }
   }, [isDarkMode]);
+
+  if (!handleLogout) {
+    handleLogout = () => {
+        localStorage.removeItem('user');
+        localStorage.removeItem('maintainer');
+        navigate('/');
+    }
+  }
 
   const renderAuthButtons = (isMobile = false) => (
     <div
