@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/HomePage';
@@ -20,7 +21,7 @@ function App() {
           <Route
             path="/maintainer"
             element={
-              <ProtectedRoute role='role'>
+              <ProtectedRoute>
                 <MaintainerPage />
               </ProtectedRoute>
             }

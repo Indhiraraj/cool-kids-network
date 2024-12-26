@@ -34,7 +34,7 @@ const useSystemTheme = () => {
 
   // Function to manually toggle the theme
   const toggleTheme = () => {
-    setIsDarkMode(prevIsDarkMode => {
+    setIsDarkMode((prevIsDarkMode) => {
       const newTheme = !prevIsDarkMode;
       localStorage.setItem('theme', newTheme ? 'dark' : 'light');
       document.documentElement.classList.toggle('dark', newTheme);
