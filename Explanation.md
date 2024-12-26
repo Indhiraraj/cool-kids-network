@@ -116,6 +116,10 @@ Three user roles with different access levels:
 2. **Testing:**
    - No automated tests
    - Manual testing only
+   
+### Future Improvements
+    - Add unit and integration tests
+    - Implement CI/CD pipeline to automate linting and testing when merged with main branch
 
 ## Development Setup
 
@@ -135,11 +139,15 @@ Three user roles with different access levels:
 
 ### Setup Environment Variables
 ## backend
+```bash
 MONGODB_URI=
 PORT=
 RANDOM_USER_API_URL=
+```
 ## frontend
-VITE_BASE_API_URL
+```bash
+VITE_BASE_API_URL=
+```
 
 ### Start Development Servers
 # Frontend
