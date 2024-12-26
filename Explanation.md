@@ -55,6 +55,7 @@ Three user roles with different access levels:
 ### 3. Code Quality
 **Implemented:**
 - ESLint for code quality
+- Workflow for linting
 - Layered architecture
 - Error handling
 
@@ -119,7 +120,7 @@ Three user roles with different access levels:
    
 ### Future Improvements
     - Add unit and integration tests
-    - Implement CI/CD pipeline to automate linting and testing when merged with main branch
+    - Implement workflows for testing when merged with main branch
 
 ## Development Setup
 
